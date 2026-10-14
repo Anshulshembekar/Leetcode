@@ -1,32 +1,25 @@
 class Solution {
     public String reverseWords(String s) {
+        String[] words = s.split(" ");
 
-        char[] arr = s.toCharArray();
+        for (int i = 0; i < words.length; i++) {
+            char[] ch = words[i].toCharArray();
 
-        int start = 0;
+            int left = 0;
+            int right = ch.length - 1;
 
-        for (int i = 0; i <= arr.length; i++) {
+            while (left < right) {
+                char temp = ch[left];
+                ch[left] = ch[right];
+                ch[right] = temp;
 
-            // End of word
-            if (i == arr.length || arr[i] == ' ') {
-
-                int left = start;
-                int right = i - 1;
-
-                // Reverse the current word
-                while (left < right) {
-                    char temp = arr[left];
-                    arr[left] = arr[right];
-                    arr[right] = temp;
-
-                    left++;
-                    right--;
-                }
-
-                start = i + 1;
+                left++;
+                right--;
             }
+
+            words[i] = new String(ch);
         }
 
-        return new String(arr);
+        return String.join(" ", words);
     }
 }
